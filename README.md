@@ -58,7 +58,6 @@ $ saw watch /aws/lambda/events_debug_logger_ec2 --expand
         "state": "shutting-down"
     },
     "detail-type": "EC2 Instance State-change Notification",
-    "fields.time": "2021-04-17T00:33:57Z",
     "id": "cb3e793e-613b-a733-91e3-b92907d6f9fd",
     "level": "info",
     "msg": "handled event",
