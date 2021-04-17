@@ -25,7 +25,7 @@ module "eventbridge_debug_logger" {
 }
 ```
 
-The above example module invocation will track all ec2 events. Using a tool like (saw)[https://github.com/TylerBrock/saw] to tail cloudwatch logs, the following log events will be written by launching and terminating an EC2 instance.
+The above example module invocation will track all ec2 events. Using a tool like [saw](https://github.com/TylerBrock/saw) to tail cloudwatch logs, the following log events will be written by launching and terminating an EC2 instance.
 
 ```
 $ saw watch /aws/lambda/events_debug_logger_ec2 --expand
@@ -102,6 +102,8 @@ $ saw watch /aws/lambda/events_debug_logger_ec2 --expand
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| cloudwatch\_log\_group\_name | Name of cloudwatch log group which holds service-specific log events. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
