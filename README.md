@@ -1,6 +1,8 @@
 # terraform-module-eventbridge-debug-logger
 
-A terraform module to create resources for capturing all eventbridge events for a given service.
+A terraform module to create resources for capturing all eventbridge events for a given service as cloudwatch logs. 
+
+This is a developer workflow productivity tool that can be used to log events created by any service in order to see the event json schema, which is necessary in order to produce workflows around eventbridge rules.
 
 ## Contributing
 
