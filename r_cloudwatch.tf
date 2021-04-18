@@ -1,5 +1,7 @@
 resource "aws_cloudwatch_log_group" "this" {
-  name              = "/aws/lambda/${var.name}/${local.service_name}"
+  for_each = local.lambdas
+
+  name              = "/aws/lambda/${each.key}_${local.service_name}"
   retention_in_days = var.lambda_logs_retention_in_days
   tags              = var.tags
 }

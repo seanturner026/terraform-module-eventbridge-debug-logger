@@ -2,7 +2,7 @@ resource "null_resource" "lambda_build" {
   for_each = local.lambdas
 
   triggers = {
-    binary_exists = fileexists("${path.module}/lambdas/bin/${each.key}")
+    binary_exists = local.null.lambda_binary_exists[each.key]
 
     main = join("", [
       for file in fileset("${path.module}/lambdas/cmd/${each.key}", "*.go") : filebase64("${path.module}/lambdas/cmd/${each.key}/${file}")
