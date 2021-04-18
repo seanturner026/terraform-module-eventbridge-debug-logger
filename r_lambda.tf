@@ -19,8 +19,7 @@ resource "null_resource" "lambda_build" {
 }
 
 resource "aws_lambda_function" "this" {
-  depends_on = [null_resource.lambda_build]
-  for_each   = local.lambdas
+  for_each = local.lambdas
 
   filename         = "${path.module}/archive/${each.key}.zip"
   function_name    = "${each.key}_${local.service_name}"
