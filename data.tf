@@ -3,7 +3,7 @@ data "archive_file" "this" {
   for_each   = local.lambdas
 
   type        = "zip"
-  source_file = local.null.lambda_binary_locations[each.key]
+  source_file = "${path.module}/lambdas/bin/${each.key}"
   output_path = "${path.module}/archive/${each.key}.zip"
 }
 

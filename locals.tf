@@ -9,7 +9,6 @@ locals {
   }
 
   null = {
-    lambda_binary_exists    = { for key, _ in local.lambdas : key => fileexists("${path.module}/lambdas/bin/${key}") }
-    lambda_binary_locations = { for key, _ in local.lambdas : key => "${path.module}/lambdas/bin/${key}" }
+    lambda_binary_exists = { for key, _ in local.lambdas : key => fileexists("${path.module}/lambdas/bin/${key}") }
   }
 }
