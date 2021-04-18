@@ -21,7 +21,7 @@ resource "null_resource" "lambda_build" {
 resource "aws_lambda_function" "this" {
   for_each = local.lambdas
 
-  filename         = "${path.module}/archive/${each.key}.zip"
+  filename         = "${path.module}/lambdas/archive/${each.key}.zip"
   function_name    = "${each.key}_${local.service_name}"
   description      = each.value.description
   role             = aws_iam_role.this.arn
