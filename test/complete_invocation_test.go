@@ -53,7 +53,7 @@ func TestCompleteInvocation(t *testing.T) {
 		}
 	}
 
-	expectedSawCommand := "saw watch /aws/lambda/events_debug_logger_ecs --expand"
+	expectedSawCommand := fmt.Sprintf("saw watch /aws/lambda/events_debug_logger_%s --expand", serviceName)
 	sawCommand := terraform.Output(t, options, "saw_command")
 
 	assert.Equal(t, expectedSawCommand, sawCommand)
