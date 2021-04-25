@@ -12,8 +12,9 @@ resource "aws_cloudwatch_event_bus" "this" {
 }
 
 resource "aws_cloudwatch_event_rule" "this" {
-  name        = "${local.service_name}_catchall_rule"
-  description = "Capture all ${var.service_name} events"
+  name           = "${var.name}_${local.service_name}_star_rule"
+  description    = "Capture all ${var.service_name} events"
+  event_bus_name = aws_cloudwatch_event_bus.this.name
 
   event_pattern = jsonencode({
     "source" : ["aws.${var.service_name}"],
@@ -23,8 +24,9 @@ resource "aws_cloudwatch_event_rule" "this" {
 }
 
 resource "aws_cloudwatch_event_target" "this" {
-  arn  = aws_lambda_function.this["events_debug_logger"].arn
-  rule = aws_cloudwatch_event_rule.this.id
+  event_bus_name = aws_cloudwatch_event_bus.this.id
+  arn            = aws_lambda_function.this["events_debug_logger"].arn
+  rule           = aws_cloudwatch_event_rule.this.name
 
   retry_policy {
     maximum_event_age_in_seconds = 300

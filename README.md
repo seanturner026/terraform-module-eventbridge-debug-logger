@@ -103,6 +103,14 @@ $ saw watch /aws/lambda/events_debug_logger_ec2 --expand
 
 | Name | Description |
 |------|-------------|
+| cloudwatch\_log\_group\_arn | ARN of cloudwatch log group which holds service-specific log events. |
 | cloudwatch\_log\_group\_name | Name of cloudwatch log group which holds service-specific log events. |
+| event\_bus\_arn | ARN of the event bridge eventbus. |
+| event\_bus\_name | Name of the event bridge eventbus. |
+| event\_rule\_arn | ARN of the event bridge rule. |
+| event\_rule\_id | ID of the event bridge rule. |
+| event\_rule\_name | Name of the event bridge rule. |
+| event\_target\_arn | ARN of the resource targeted by the eventbridge target. |
+| event\_target\_rule | Eventbridge rule responsible for invoking the target. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
