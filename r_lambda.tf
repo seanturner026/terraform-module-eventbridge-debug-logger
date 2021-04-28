@@ -36,7 +36,7 @@ resource "aws_lambda_function" "this" {
 resource "aws_lambda_permission" "this" {
   action        = "lambda:InvokeFunction"
   statement_id  = "AllowExecutionFromEvents-${join("", [for word in split("_", local.service_name) : title(word)])}"
-  function_name = aws_lambda_function.this["events_debug_logger"].function_name
+  function_name = aws_lambda_function.this["events_logger"].function_name
   principal     = "events.amazonaws.com"
   source_arn    = aws_cloudwatch_event_rule.this.arn
 }

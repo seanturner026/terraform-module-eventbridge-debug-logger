@@ -7,10 +7,10 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
-	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
@@ -19,6 +19,7 @@ import (
 
 func TestCompleteInvocation(t *testing.T) {
 	t.Parallel()
+	name := "events_logger"
 	uniqueID := strings.ToLower(random.UniqueId())
 	serviceName := "ecs"
 
@@ -40,8 +41,7 @@ func TestCompleteInvocation(t *testing.T) {
 
 	client := eventbridge.NewFromConfig(cfg)
 	input := &eventbridge.DescribeRuleInput{
-		Name:         aws.String(fmt.Sprintf("_%s_%s_star_rule", uniqueID, serviceName)),
-		EventBusName: aws.String(fmt.Sprintf("_%s_%s", uniqueID, serviceName)),
+		Name: aws.String(fmt.Sprintf("_%s_%s_star_rule", uniqueID, serviceName)),
 	}
 
 	response, err := client.DescribeRule(context.TODO(), input)
@@ -53,7 +53,7 @@ func TestCompleteInvocation(t *testing.T) {
 		}
 	}
 
-	expectedSawCommand := fmt.Sprintf("saw watch /aws/lambda/events_debug_logger_%s --expand", serviceName)
+	expectedSawCommand := fmt.Sprintf("saw watch /aws/lambda/%s_%s --expand", name, serviceName)
 	sawCommand := terraform.Output(t, options, "saw_command")
 
 	assert.Equal(t, expectedSawCommand, sawCommand)

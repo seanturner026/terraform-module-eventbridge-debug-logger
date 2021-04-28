@@ -1,21 +1,11 @@
 output "cloudwatch_log_group_arn" {
   description = "ARN of cloudwatch log group which holds service-specific log events."
-  value       = aws_cloudwatch_log_group.this["events_debug_logger"].arn
+  value       = aws_cloudwatch_log_group.this["events_logger"].arn
 }
 
 output "cloudwatch_log_group_name" {
   description = "Name of cloudwatch log group which holds service-specific log events."
-  value       = aws_cloudwatch_log_group.this["events_debug_logger"].name
-}
-
-output "event_bus_arn" {
-  description = "ARN of the event bridge eventbus."
-  value       = aws_cloudwatch_event_bus.this.arn
-}
-
-output "event_bus_name" {
-  description = "Name of the event bridge eventbus."
-  value       = aws_cloudwatch_event_bus.this.name
+  value       = aws_cloudwatch_log_group.this["events_logger"].name
 }
 
 output "event_rule_arn" {
