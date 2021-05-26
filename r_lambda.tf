@@ -1,23 +1,3 @@
-resource "null_resource" "lambda_build" {
-  for_each = local.lambdas
-
-  triggers = {
-    binary_exists = local.null.lambda_binary_exists[each.key]
-
-    main = join("", [
-      for file in fileset("${path.module}/lambdas/cmd/${each.key}", "*.go") : filebase64("${path.module}/lambdas/cmd/${each.key}/${file}")
-    ])
-  }
-
-  provisioner "local-exec" {
-    command = "export GO111MODULE=on"
-  }
-
-  provisioner "local-exec" {
-    command = "GOOS=linux go build -ldflags '-s -w' -o ${path.module}/lambdas/bin/${each.key} ${path.module}/lambdas/cmd/${each.key}/."
-  }
-}
-
 resource "aws_lambda_function" "this" {
   for_each = local.lambdas
 
