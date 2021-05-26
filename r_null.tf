@@ -33,6 +33,6 @@ resource "null_resource" "lambda_build" {
   }
 
   provisioner "local-exec" {
-    command = "GOOS=linux go build -ldflags '-s -w' -o ${path.module}/lambdas/bin/${each.key} ${path.module}/lambdas/cmd/${each.key}/."
+    command = "GOOS=linux go build -ldflags '-s -w' -o ./${path.module}/lambdas/bin/${each.key} ./${path.module}/lambdas/cmd/${each.key}/."
   }
 }
