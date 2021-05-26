@@ -16,7 +16,7 @@ Full example(s) leveraging this module is contained in the [examples](https://gi
 
 ```hcl
 module "eventbridge_debug_logger" {
-  source = "git@github.com:seanturner026/terraform-module-eventbridge-debug-logger.git"
+  source = "github.com/seanturner026/terraform-module-eventbridge-debug-logger.git"
 
   name                          = "eventbridge_debug_logger"
   service_name                  = "ec2"

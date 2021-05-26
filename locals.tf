@@ -1,5 +1,7 @@
 locals {
-  service_name = replace(var.service_name, "-", "_")
+  main_module_name = split(".terraform/modules/", path.module)[1]
+  main_module_path = "./.terraform/modules/${local.main_module_name}"
+  service_name     = replace(var.service_name, "-", "_")
 
   lambdas = {
     events_logger = {
