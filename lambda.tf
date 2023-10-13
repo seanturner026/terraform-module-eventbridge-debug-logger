@@ -5,10 +5,10 @@ resource "aws_lambda_function" "this" {
   function_name    = "${each.key}_${local.service_name}"
   description      = each.value.description
   role             = aws_iam_role.this.arn
-  handler          = each.key
+  handler          = "main.lambda_handler"
   publish          = false
   source_code_hash = data.archive_file.this[each.key].output_base64sha256
-  runtime          = "go1.x"
+  runtime          = "python3.11"
   timeout          = "10"
   tags             = var.tags
 }
